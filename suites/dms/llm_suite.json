@@ -1,0 +1,43 @@
+{
+  "eval_suite": "DMS LLM Suite V1",
+  "type": "llm",
+  "default_model": "gemini-1.5-flash",
+  "default_threshold": 0.7,
+  "default_metrics": [
+    {
+      "name": "answer_relevancy",
+      "threshold": 0.7
+    },
+    {
+      "name": "g_eval",
+      "criteria": "Câu trả lời phải chính xác, đầy đủ, đúng nghiệp vụ DMS",
+      "threshold": 0.7
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "DMS-LLM-001",
+      "name": "Chính sách chiết khấu đại lý cấp 1",
+      "input": "Chiết khấu cho đại lý cấp 1 là bao nhiêu?",
+      "expected_output": "Đại lý cấp 1 được chiết khấu 15% trên giá niêm yết"
+    },
+    {
+      "id": "DMS-LLM-002",
+      "name": "Điều kiện trở thành đại lý cấp 2",
+      "input": "Điều kiện để trở thành đại lý cấp 2 là gì?",
+      "expected_output": "Doanh thu tối thiểu 200 triệu/tháng và hoạt động ít nhất 6 tháng"
+    },
+    {
+      "id": "DMS-LLM-003",
+      "name": "Thời hạn thanh toán công nợ",
+      "input": "Thời hạn thanh toán công nợ mặc định là bao nhiêu ngày?",
+      "expected_output": "30 ngày kể từ ngày xuất hóa đơn",
+      "metrics": [
+        {
+          "name": "answer_relevancy",
+          "threshold": 0.8
+        }
+      ]
+    }
+  ]
+}

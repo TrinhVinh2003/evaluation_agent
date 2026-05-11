@@ -1,0 +1,38 @@
+{
+  "eval_suite": "DMS Agent Suite — Local Test",
+  "type": "agent",
+  "default_model": null,
+  "default_threshold": 0.8,
+  "default_metrics": [
+    { "name": "exact_match", "threshold": 1.0 }
+  ],
+  "test_cases": [
+    {
+      "id": "DMS-AGENT-001",
+      "name": "Tra cứu công nợ theo mã khách hàng",
+      "input": "Xem công nợ của khách hàng KH001",
+      "expected_output": "KH001",
+      "expected_tools": [
+        { "name": "lay_cong_no_khach_hang", "arguments": { "customer_code": "KH001" } }
+      ]
+    },
+    {
+      "id": "DMS-AGENT-002",
+      "name": "Tìm kiếm khách hàng theo tên",
+      "input": "Tìm khách hàng tên Hùng Cường",
+      "expected_output": "Hùng Cường",
+      "expected_tools": [
+        { "name": "tim_kiem_khach_hang", "arguments": { "keyword": "Hùng Cường" } }
+      ]
+    },
+    {
+      "id": "DMS-AGENT-003",
+      "name": "KPI tháng 4 năm 2026",
+      "input": "KPI tháng 4 năm 2026 thế nào?",
+      "expected_output": "84",
+      "expected_tools": [
+        { "name": "lay_kpi_kinh_doanh", "arguments": { "month": 4, "year": 2026 } }
+      ]
+    }
+  ]
+}

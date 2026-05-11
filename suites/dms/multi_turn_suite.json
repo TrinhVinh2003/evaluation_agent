@@ -1,0 +1,117 @@
+{
+  "eval_suite": "DMS Multi-turn Suite V1",
+  "type": "multi_turn",
+  "default_model": "gemini-1.5-flash",
+  "default_threshold": 0.8,
+  "default_metrics": [
+    {
+      "name": "tool_correctness",
+      "threshold": 0.9
+    },
+    {
+      "name": "argument_correctness",
+      "threshold": 0.85
+    },
+    {
+      "name": "conversation_completeness",
+      "threshold": 0.8
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "DMS-MT-001",
+      "name": "Tìm đại lý → chi tiết → công nợ",
+      "criteria": [
+        "Lượt 1: gọi tool tìm kiếm với keyword đúng",
+        "Lượt 2: tự suy luận mã KH007 từ kết quả lượt 1",
+        "Lượt 3: giữ context, gọi tool công nợ cho KH007"
+      ],
+      "turns": [
+        {
+          "content": "Anh muốn xem hồ sơ Đại lý Hùng Cường.",
+          "expected_output": "Tìm thấy Đại lý Hùng Cường, mã KH007",
+          "expected_tools": [
+            {
+              "name": "tim_kiem_khach_hang",
+              "arguments": {
+                "keyword": "Đại lý Hùng Cường"
+              }
+            }
+          ]
+        },
+        {
+          "content": "Lấy chi tiết hồ sơ khách này.",
+          "expected_output": "Chi tiết đầy đủ hồ sơ KH007",
+          "expected_tools": [
+            {
+              "name": "lay_chi_tiet_khach_hang",
+              "arguments": {
+                "customer_code": "KH007"
+              }
+            }
+          ]
+        },
+        {
+          "content": "Cho xem luôn công nợ của họ.",
+          "expected_output": "Thông tin công nợ hiện tại KH007",
+          "expected_tools": [
+            {
+              "name": "lay_cong_no_khach_hang",
+              "arguments": {
+                "customer_code": "KH007"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DMS-MT-002",
+      "name": "Xem đơn hàng → trạng thái → hủy đơn",
+      "criteria": [
+        "Lượt 1: lấy danh sách đơn hàng tháng 4",
+        "Lượt 2: lấy trạng thái đơn cụ thể DH123",
+        "Lượt 3: gọi tool hủy đơn DH123"
+      ],
+      "turns": [
+        {
+          "content": "Đơn hàng tháng 4 của tôi có gì?",
+          "expected_output": "Danh sách đơn hàng tháng 4/2026",
+          "expected_tools": [
+            {
+              "name": "lay_don_hang_theo_thang",
+              "arguments": {
+                "month": 4,
+                "year": 2026
+              }
+            }
+          ]
+        },
+        {
+          "content": "Đơn DH123 đang ở trạng thái gì?",
+          "expected_output": "Trạng thái đơn hàng DH123",
+          "expected_tools": [
+            {
+              "name": "lay_trang_thai_don_hang",
+              "arguments": {
+                "order_id": "DH123"
+              }
+            }
+          ]
+        },
+        {
+          "content": "Hủy đơn đó đi.",
+          "expected_output": "Đơn hàng DH123 đã được hủy thành công",
+          "expected_tools": [
+            {
+              "name": "huy_don_hang",
+              "arguments": {
+                "order_id": "DH123"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

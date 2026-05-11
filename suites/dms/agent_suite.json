@@ -1,0 +1,45 @@
+{
+  "eval_suite": "DMS Agent Suite V1",
+  "type": "agent",
+  "default_model": "gemini-1.5-flash",
+  "default_threshold": 0.85,
+  "default_metrics": [
+    { "name": "tool_correctness",     "threshold": 0.9  },
+    { "name": "argument_correctness", "threshold": 0.85 }
+  ],
+  "test_cases": [
+    {
+      "id": "DMS-AGENT-001",
+      "name": "Tra cứu công nợ theo mã khách hàng",
+      "input": "Xem công nợ của khách hàng KH007",
+      "expected_output": "Thông tin công nợ KH007 gồm số tiền nợ và hạn thanh toán",
+      "expected_tools": [
+        { "name": "lay_cong_no_khach_hang",
+          "arguments": { "customer_code": "KH007" }
+        }
+      ]
+    },
+    {
+      "id": "DMS-AGENT-002",
+      "name": "Tìm kiếm khách hàng theo tên",
+      "input": "Tìm khách hàng tên Hùng Cường",
+      "expected_output": "Danh sách khách hàng khớp với từ khóa Hùng Cường",
+      "expected_tools": [
+        { "name": "tim_kiem_khach_hang",
+          "arguments": { "keyword": "Hùng Cường" }
+        }
+      ]
+    },
+    {
+      "id": "DMS-AGENT-003",
+      "name": "Xem đơn hàng theo ngày",
+      "input": "Lấy đơn hàng từ ngày 01/04 đến 21/04/2026",
+      "expected_output": "Danh sách đơn hàng trong khoảng thời gian yêu cầu",
+      "expected_tools": [
+        { "name": "lay_don_hang_theo_ngay",
+          "arguments": { "from_date": "2026-04-01", "to_date": "2026-04-21" }
+        }
+      ]
+    }
+  ]
+}

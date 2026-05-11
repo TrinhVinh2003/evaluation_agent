@@ -1,0 +1,35 @@
+{
+  "eval_suite": "DMS RAG Suite V1",
+  "type": "rag",
+  "default_model": "gemini-1.5-flash",
+  "default_threshold": 0.75,
+  "default_metrics": [
+    { "name": "answer_relevancy",     "threshold": 0.7 },
+    { "name": "faithfulness",         "threshold": 0.8 },
+    { "name": "contextual_relevancy", "threshold": 0.7 }
+  ],
+  "test_cases": [
+    {
+      "id": "DMS-RAG-001",
+      "name": "Quy trình đặt hàng đại lý mới",
+      "input": "Quy trình đặt hàng cho đại lý mới?",
+      "expected_output": "Đại lý mới cần đăng ký, ký hợp đồng và đặt cọc 50 triệu",
+      "retrieval_context": [
+        "Đại lý mới phải hoàn tất đăng ký trên DMS trong 3 ngày làm việc",
+        "Sau ký hợp đồng cần đặt cọc tối thiểu 50 triệu để kích hoạt tài khoản",
+        "Đơn đầu tiên phải được quản lý vùng xét duyệt trước khi xử lý"
+      ]
+    },
+    {
+      "id": "DMS-RAG-002",
+      "name": "Chính sách đổi trả hàng hóa",
+      "input": "Hàng đổi trả cần điều kiện gì?",
+      "expected_output": "Hàng còn nguyên seal, trong vòng 7 ngày, kèm hóa đơn gốc",
+      "retrieval_context": [
+        "Hàng hóa đổi trả phải còn nguyên seal và chưa qua sử dụng",
+        "Thời hạn đổi trả tối đa 7 ngày kể từ ngày nhận hàng",
+        "Cần xuất trình hóa đơn mua hàng gốc khi đổi trả"
+      ]
+    }
+  ]
+}
